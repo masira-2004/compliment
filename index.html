@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliment App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1b0b24, #3b145f);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    .card {
+      width: 340px;
+      padding: 30px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+      animation: fadeIn 0.8s ease;
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      margin: auto;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffb6d5, #ff69b4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      animation: pulse 2s infinite;
+    }
+
+    h1 {
+      font-weight: 400;
+      margin: 15px 0 10px;
+      color: #ffb6d5;
+    }
+
+    p { opacity: 0.9; }
+
+    .line {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: popIn 0.6s ease forwards;
+}
+
+.line:nth-child(1) { animation-delay: 0.3s; }
+.line:nth-child(2) { animation-delay: 0.7s; }
+.line:nth-child(3) { animation-delay: 1.2s; }
+.line:nth-child(4) { animation-delay: 1.4s; }
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #ff69b4, #ff9acb);
+      color: #181010;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover { transform: scale(1.05); }
+
+    .progress {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 14px;
+    }
+
+    .bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff69b4, #ffd1e8);
+      transition: width 1.5s ease;
+    }
+
+    .hidden { display: none; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="screen1">
+    <div class="avatar line">💗</div>
+    <h1 class="line">Hello, Meri Jaan!</h1>
+    <p class="line">Apko pata hai aap kitne cute ho?</p>
+    <button class="line" onclick="showProgress()">Open My Heart 💖</button>
+  </div>
+
+  <div class="card hidden" id="screen2">
+    <h2>Measuring your cuteness…</h2>
+    <h1 id="percent">0%</h1>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <p style="margin-top:10px">⚠ Too cute to handle</p>
+  </div>
+
+  <div class="card hidden" id="screen3">
+    <div class="avatar line">💗</div>
+    <h1 class="line">For you Sabir</h1>
+    <p class="line">A little note made with love<br>for you jaan</p>
+    <button class="line" onclick="showNote()">Tap to reveal</button>
+  </div>
+
+  <div class="card hidden" id="screen4">
+    <h1 class="line">A little note for you Meri Jaan 🤍</h1>
+    <p class="line" style="font-size:16px">
+      My Love. So grateful ki hum mile.
+      Aap bht special ho mere liye. Aapki smile,
+      Aapka dil, aapka mere liye pyaar
+      just made my life brighter. Love you baby.
+    </p>
+    <button class="line" onclick="finalScreen()">One more thing →</button>
+  </div>
+
+  <div class="card hidden" id="screen5">
+    <div class="avatar line">🤍</div>
+    <h1 class="line">You'll always be special to me</h1>
+  </div>
+
+<script>
+  function showProgress() {
+    screen1.classList.add('hidden');
+    screen2.classList.remove('hidden');
+
+    let i = 0;
+    const bar = document.getElementById('bar');
+    const percent = document.getElementById('percent');
+
+    const interval = setInterval(() => {
+      i++;
+      percent.textContent = i + '%';
+      bar.style.width = i + '%';
+      if (i >= 120) {
+        clearInterval(interval);
+        setTimeout(() => {
+          screen2.classList.add('hidden');
+          screen3.classList.remove('hidden');
+        }, 800);
+      }
+    }, 25);
+  }
+
+  function showNote() {
+    screen3.classList.add('hidden');
+    screen4.classList.remove('hidden');
+  }
+
+  function finalScreen() {
+    screen4.classList.add('hidden');
+    screen5.classList.remove('hidden');
+  }
+
+</script>
+
+</body>
+</html>
